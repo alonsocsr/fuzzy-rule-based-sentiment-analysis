@@ -7,7 +7,7 @@ import skfuzzy as fuzz
 import time
 
 # Modulo 1: Preprocesamiento del dataset
-data = pd.read_csv("/home/juanchogonza98/PycharmProjects/fuzzy-rule-based-sentiment-analysis/archive/test_data.csv",
+data = pd.read_csv("/home/juanchogonza98/PycharmProjects/fuzzy-rule-based-sentiment-analysis/archive/train_data.csv",
                    encoding='ISO-8859-1')
 
 # Asegurarse de que el lexicon esté disponible
@@ -102,7 +102,8 @@ def obtener_puntaje_sentimiento(text):
         sentiment = "Neutral"
     elif 6.67 < output < 10:
         sentiment = "Positive"
-
+    else:
+        sentiment = "Neutral" #Valor predeterminado para evitar UnboundLocalError
     end_time = time.time()  # Fin de tiempo de ejecución
     exec_time = round(end_time - start_time, 4)  # Calcular tiempo de ejecución
 
