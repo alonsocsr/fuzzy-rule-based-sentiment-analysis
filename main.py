@@ -7,14 +7,14 @@ import skfuzzy as fuzz
 import time
 
 # Modulo 1: Preprocesamiento del dataset
-data = pd.read_csv("/home/juanchogonza98/PycharmProjects/fuzzy-rule-based-sentiment-analysis/archive/train_data.csv",
+data = pd.read_csv("/home/cesaralonso/fuzzy-rule-based-sentiment-analysis/train_data.csv",
                    encoding='ISO-8859-1')
 
 # Asegurarse de que el lexicon esté disponible
 nltk.download('vader_lexicon')
 sia = SentimentIntensityAnalyzer()
 
-
+inicio_tiempo = time.time()
 # Preprocesamiento de texto
 def decontracted(phrase):
     # Expansión de contracciones y eliminación de elementos no deseados
@@ -122,13 +122,18 @@ total_negative = len(data[data['New_Sentiment'] == 'Negative'])
 total_neutral = len(data[data['New_Sentiment'] == 'Neutral'])
 avg_exec_time = data['ExecTime'].mean()
 
+
+
 # Guardar resultados en un nuevo archivo CSV
-output_file_path = '/home/juanchogonza98/PycharmProjects/fuzzy-rule-based-sentiment-analysis/archive/analisis_benchmark_resultado.csv'
+output_file_path = '/home/cesaralonso/fuzzy-rule-based-sentiment-analysis/analisis_resultado.csv'
 data.to_csv(output_file_path, index=False)
 
+fin_tiempo = time.time()
+tiempo_ejecucion = fin_tiempo - inicio_tiempo
 # Imprimir resumen de benchmarks
 print("Resumen de Benchmarks:")
 print(f"Total Positivos: {total_positive}")
 print(f"Total Negativos: {total_negative}")
 print(f"Total Neutrales: {total_neutral}")
 print(f"Tiempo promedio de ejecución total: {round(avg_exec_time, 4)} segundos")
+print(f"\nTiempo total de ejecución: {round(tiempo_ejecucion, 3)} segundos")
